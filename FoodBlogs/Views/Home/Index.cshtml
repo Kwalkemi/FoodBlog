@@ -1,0 +1,51 @@
+﻿@model IEnumerable<FoodBlogs.Models.MyModel.Post>
+
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div>
+
+    @foreach (var lvar in Model)
+    {
+    <div class="home-post">
+        <div class="home-post-new">
+            <div class="home-post-heading">
+                <h3>@lvar.istrPostHeading</h3>
+            </div>
+            @if (lvar.istrImage != null && lvar.istrImage != "")
+            {
+                <img src=@Url.Content(lvar.istrImage) align="top" HSPACE="20" VSPACE="20" />
+            }
+            else
+            {
+                <img sr="" />
+            }
+            @if (lvar.istrFrontContent != null && lvar.istrFrontContent != "")
+            {
+                <article>@Html.Raw(lvar.istrFrontContent)</article>
+            }
+            else
+            {
+                <article></article>
+            }
+
+            <strong>Ingredients</strong>
+            <ul>
+                @for (int i = 0; i < lvar.ilstIngredient.Count; i++)
+                {
+                    <li>@lvar.ilstIngredient[i]</li>
+                }
+            </ul>
+
+            <article>
+                <strong>Preparation</strong>
+                @Html.Raw(lvar.istrBackContent)
+            </article>
+        </div>
+        <div class="readmore">
+            @Html.ActionLink("Read More", "Post", new { astrPostname = lvar.istrUniqueId })
+        </div>
+    </div>
+    }
+</div>

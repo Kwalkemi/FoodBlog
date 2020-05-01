@@ -1,0 +1,162 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="FoodBlogModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Food_Blog_Master">
+          <Key>
+            <PropertyRef Name="Food_Blog_Master_Id" />
+          </Key>
+          <Property Name="Food_Blog_Master_Id" Type="int" Nullable="false" />
+          <Property Name="Food_Blog_Post_Unique_Id" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="Food_Blog_Post_Title" Type="varchar" MaxLength="1000" Nullable="false" />
+          <Property Name="Created_Post_Date" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Food_Comments">
+          <Key>
+            <PropertyRef Name="Food_Comments_Id" />
+          </Key>
+          <Property Name="Food_Comments_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Food_Comment_Description" Type="varchar(max)" Nullable="false" />
+          <Property Name="Food_Comment_Email_id" Type="varchar" MaxLength="500" />
+          <Property Name="Food_Comment_Page" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="Food_Comment_User_Name" Type="varchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="Post_Visit_Count">
+          <Key>
+            <PropertyRef Name="Post_Visit_Count_id" />
+          </Key>
+          <Property Name="Post_Visit_Count_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Post_Name" Type="varchar" MaxLength="1000" Nullable="false" />
+          <Property Name="Post_visit_count" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Post_Visit_Count_History">
+          <Key>
+            <PropertyRef Name="Post_Visit_Count_History_Id" />
+          </Key>
+          <Property Name="Post_Visit_Count_History_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Post_Name" Type="varchar" MaxLength="1000" Nullable="false" />
+          <Property Name="Post_Date" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="FoodBlogModelStoreContainer">
+          <EntitySet Name="Food_Blog_Master" EntityType="Self.Food_Blog_Master" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Food_Comments" EntityType="Self.Food_Comments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Post_Visit_Count" EntityType="Self.Post_Visit_Count" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Post_Visit_Count_History" EntityType="Self.Post_Visit_Count_History" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="FoodBlogModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Food_Comments">
+          <Key>
+            <PropertyRef Name="Food_Comments_Id" />
+          </Key>
+          <Property Name="Food_Comments_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Food_Comment_Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Food_Comment_Email_id" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Food_Comment_Page" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Food_Comment_User_Name" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityContainer Name="FoodBlogEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Food_Comments" EntityType="Self.Food_Comments" />
+          <EntitySet Name="Post_Visit_Count" EntityType="FoodBlogModel.Post_Visit_Count" />
+          <EntitySet Name="Post_Visit_Count_History" EntityType="FoodBlogModel.Post_Visit_Count_History" />
+          <EntitySet Name="Food_Blog_Master" EntityType="FoodBlogModel.Food_Blog_Master" />
+        </EntityContainer>
+        <EntityType Name="Post_Visit_Count">
+          <Key>
+            <PropertyRef Name="Post_Visit_Count_id" />
+          </Key>
+          <Property Name="Post_Visit_Count_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Post_Name" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="Post_visit_count1" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Post_Visit_Count_History">
+          <Key>
+            <PropertyRef Name="Post_Visit_Count_History_Id" />
+          </Key>
+          <Property Name="Post_Visit_Count_History_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Post_Name" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="Post_Date" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="Food_Blog_Master">
+          <Key>
+            <PropertyRef Name="Food_Blog_Master_Id" />
+          </Key>
+          <Property Name="Food_Blog_Master_Id" Type="Int32" Nullable="false" />
+          <Property Name="Food_Blog_Post_Unique_Id" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Food_Blog_Post_Title" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="Created_Post_Date" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="FoodBlogModelStoreContainer" CdmEntityContainer="FoodBlogEntities">
+          <EntitySetMapping Name="Food_Comments">
+            <EntityTypeMapping TypeName="FoodBlogModel.Food_Comments">
+              <MappingFragment StoreEntitySet="Food_Comments">
+                <ScalarProperty Name="Food_Comment_User_Name" ColumnName="Food_Comment_User_Name" />
+                <ScalarProperty Name="Food_Comments_Id" ColumnName="Food_Comments_Id" />
+                <ScalarProperty Name="Food_Comment_Description" ColumnName="Food_Comment_Description" />
+                <ScalarProperty Name="Food_Comment_Email_id" ColumnName="Food_Comment_Email_id" />
+                <ScalarProperty Name="Food_Comment_Page" ColumnName="Food_Comment_Page" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Post_Visit_Count">
+            <EntityTypeMapping TypeName="FoodBlogModel.Post_Visit_Count">
+              <MappingFragment StoreEntitySet="Post_Visit_Count">
+                <ScalarProperty Name="Post_visit_count1" ColumnName="Post_visit_count" />
+                <ScalarProperty Name="Post_Name" ColumnName="Post_Name" />
+                <ScalarProperty Name="Post_Visit_Count_id" ColumnName="Post_Visit_Count_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Post_Visit_Count_History">
+            <EntityTypeMapping TypeName="FoodBlogModel.Post_Visit_Count_History">
+              <MappingFragment StoreEntitySet="Post_Visit_Count_History">
+                <ScalarProperty Name="Post_Date" ColumnName="Post_Date" />
+                <ScalarProperty Name="Post_Name" ColumnName="Post_Name" />
+                <ScalarProperty Name="Post_Visit_Count_History_Id" ColumnName="Post_Visit_Count_History_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Food_Blog_Master">
+            <EntityTypeMapping TypeName="FoodBlogModel.Food_Blog_Master">
+              <MappingFragment StoreEntitySet="Food_Blog_Master">
+                <ScalarProperty Name="Created_Post_Date" ColumnName="Created_Post_Date" />
+                <ScalarProperty Name="Food_Blog_Post_Title" ColumnName="Food_Blog_Post_Title" />
+                <ScalarProperty Name="Food_Blog_Post_Unique_Id" ColumnName="Food_Blog_Post_Unique_Id" />
+                <ScalarProperty Name="Food_Blog_Master_Id" ColumnName="Food_Blog_Master_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

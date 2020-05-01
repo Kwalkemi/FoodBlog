@@ -1,0 +1,57 @@
+﻿@model IEnumerable<FoodBlogs.Models.MyModel.Post>
+
+@{
+    ViewBag.Title = "About";
+}
+
+<h2>About</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.istrPostHeading)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.istrFrontContent)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.istrImage)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.istrIngredient)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.istrBackContent)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.istrPostHeading)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.istrFrontContent)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.istrImage)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.istrIngredient)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.istrBackContent)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>

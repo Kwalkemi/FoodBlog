@@ -1,0 +1,86 @@
+﻿@model FoodBlogs.Models.MyModel.Post
+
+@{
+    ViewBag.Title = "Post";
+}
+
+<div class="post">
+    <div>
+        <h1>@Model.istrPostHeading</h1>
+    </div>
+    @if (Model.istrImage != null && Model.istrImage != "")
+    {
+        <img src=@Url.Content(Model.istrImage) />
+    }
+    else
+    {
+        <img sr="" />
+    }
+    @if (Model.istrFrontContent != null && Model.istrFrontContent != "")
+    {
+        <article>@Html.Raw(Model.istrFrontContent)</article>
+    }
+    else
+    {
+        <article></article>
+    }
+
+    <strong>Ingredients</strong>
+    <ul>
+        @for (int i = 0; i < Model.ilstIngredient.Count; i++)
+        {
+            <li>@Model.ilstIngredient[i]</li>
+        }
+    </ul>
+
+    <article>
+        <strong>Preparation</strong>
+        @Html.Raw(Model.istrBackContent)
+    </article>
+</div>
+
+<div class="container comment">
+
+
+
+    <div class="row">
+        <header class="col-sm-12">
+            <h3>Feedback</h3>
+        </header><!-- /col-sm-12 -->
+    </div><!-- /row -->
+    <div class="row">
+        @using (Html.BeginForm("Comment", "Home", FormMethod.Post))
+        {
+            @Html.HiddenFor(m => m.istrUniqueId)
+            @Html.TextBoxFor(m => m.iComment.Food_Comment_User_Name, new { placeholder = "Name" })
+            @Html.TextBoxFor(m => m.iComment.Food_Comment_Email_id, "", new { placeholder = "Email" })
+
+            @Html.TextAreaFor(m => m.iComment.Food_Comment_Description, new { placeholder = "Type your comment here.", cols = "60", rows = "5" })
+            <br />
+            <input type="submit" value="Submit" />
+        }
+    </div>
+
+    @foreach (var lvar in Model.ilstComment)
+    {
+        <div class="row">
+            <div class="col-sm-1">
+                <div>
+                    <img src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png">
+                </div><!-- /thumbnail -->
+            </div><!-- /col-sm-1 -->
+            <div class="col-sm-11">
+                <div class="card">
+                    <div class="card-header">
+                        <strong>@lvar.Food_Comment_User_Name</strong> <span class="text-muted">commented 5 days ago</span>
+                    </div>
+                    <div class="card-body">
+                        @lvar.Food_Comment_Description
+                    </div><!-- /panel-body -->
+                </div><!-- /panel panel-default -->
+            </div><!-- /col-sm-5 -->
+        </div><!-- /row -->
+        <br/>
+    }
+</div>
+
