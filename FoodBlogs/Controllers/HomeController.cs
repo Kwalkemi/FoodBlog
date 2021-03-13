@@ -15,12 +15,13 @@ using System.Web.Hosting;
 
 namespace FoodBlogs.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         public ActionResult Index()
         {
             Post lPost = null;
             XmlFunction lXmlFunction = new XmlFunction();
+            Business_Logic lBusiness_Logic = new Business_Logic();
             List<Post> lstPost = new List<Post>();
             //string rootpath = HostingEnvironment.ApplicationPhysicalPath;
             string lstrPath = HostingEnvironment.ApplicationPhysicalPath + "Xml";
@@ -41,14 +42,16 @@ namespace FoodBlogs.Controllers
                 if (lstrFrontContent != null && lstrFrontContent.Count() > 0)
                     lPost.istrFrontContent = lstrFrontContent.Aggregate("", (current, next) => current + "</br>" + next);
                 lPost.ilstIngredient = lXmlFunction.GetElementsAtNode(lstrPath, filename, "Ingredient").FirstOrDefault().ToString().Split(',').ToList();
+                lBusiness_Logic.GetFormattedList(lPost.ilstIngredient);
                 string[] lstrBackContent = lXmlFunction.GetElementsAtNode(lstrPath, filename, "BackContent").FirstOrDefault().Split('*');
-                if (lstrBackContent != null && lstrBackContent.Count() > 0)
-                    lPost.istrBackContent = lstrBackContent.Aggregate("", (current, next) => current + "</br>" + next);
+                lPost.ilstBackContent = lBusiness_Logic.GetFormattedList(lstrBackContent.ToList());
+                
                 lstPost.Add(lPost);
             }
             lstPost = lstPost.OrderByDescending(x => x.idtCreatedPost).ToList();
             return View(lstPost);
         }
+
 
         public ActionResult Post(string astrPostname)
         {
@@ -66,15 +69,23 @@ namespace FoodBlogs.Controllers
             if (lstrFrontContent != null && lstrFrontContent.Count() > 0)
                 lPost.istrFrontContent = lstrFrontContent.Aggregate("", (current, next) => current + "</br>" + next);
             lPost.ilstIngredient = lXmlFunction.GetElementsAtNode(lstrPath, filename, "Ingredient").FirstOrDefault().ToString().Split(',').ToList();
+            ///lPost.ilstIngredient.ForEach(x => { if(x.Contains("h3%") || x.Contains("%h3")){ x = x.Replace("h3%", "<h3>"); x = x.Replace("%h3","</h3>"); } });
+            lBusiness_Logic.GetFormattedList(lPost.ilstIngredient);
+            
             string[] lstrBackContent = lXmlFunction.GetElementsAtNode(lstrPath, filename, "BackContent").FirstOrDefault().Split('*');
-            if (lstrBackContent != null && lstrBackContent.Count() > 0)
-                lPost.istrBackContent = lstrBackContent.Aggregate("", (current, next) => current + "</br>" + next);
+            lPost.ilstBackContent = lBusiness_Logic.GetFormattedList(lstrBackContent.ToList());
 
             lPost.ilstComment = lFoodBlogEntities.Food_Comments.Where(x => x.Food_Comment_Page == astrPostname).ToList();
 
             lBusiness_Logic.InsertOrUpdateVisitCount(astrPostname);
 
             return View(lPost);
+        }
+
+        [ChildActionOnly]
+        public ActionResult NewRecipe()
+        {
+            return PartialView();
         }
 
         public ActionResult Comment(Post aPost)
@@ -89,38 +100,7 @@ namespace FoodBlogs.Controllers
             return RedirectToAction("Post", new { astrPostname = aPost.istrUniqueId });
         }
 
-        [ChildActionOnly]
-        public ActionResult PopularPost()
-        {
-            Business_Logic lBusiness_Logic = new Business_Logic();
-            List<string> lstPostUniqueId = new List<string>();
-            DBFunction lDBFunction = new DBFunction();
-            string lstrQuery = "Select top 5 * from Post_Visit_Count order by Post_visit_count desc";
-            DataTable ldtbTable = lDBFunction.FetchDataFromDatabase("FoodBlog", lstrQuery);
-
-            foreach(DataRow dr in ldtbTable.Rows)
-            {
-                lstPostUniqueId.Add(Convert.ToString(dr["Post_Name"]));
-            }
-            ViewBag.listPopularPost = lBusiness_Logic.GetPostNameById(lstPostUniqueId);
-            return PartialView();
-        }
-
-        [ChildActionOnly]
-        public ActionResult RecentPost()
-        {
-            FoodBlogEntities foodBlogEntities = new FoodBlogEntities();
-            List<Food_Blog_Master> lstFoodBlogMaster = foodBlogEntities.Food_Blog_Master.OrderByDescending(x => x.Created_Post_Date).Take(5).ToList();
-
-            List<string> lstPostUniqueId = new List<string>();
-            
-            foreach (Food_Blog_Master lFood_Blog_Master in lstFoodBlogMaster)
-            {
-                lstPostUniqueId.Add(Convert.ToString(lFood_Blog_Master.Food_Blog_Post_Title));
-            }
-            ViewBag.listRecentPost = lstPostUniqueId;
-            return PartialView("_RecentPost");
-        }
+        
 
 
 

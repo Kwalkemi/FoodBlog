@@ -31,10 +31,9 @@
                     <nav class="nav-menu mobile-menu">
                         <ul>
                             <li class="active">@Html.ActionLink("Home", "Index")</li>
-                            <li><a href="./about.html">Breakfast</a></li>
-                            <li><a href="./services.html">Dinner</a></li>
+                            <li>@Html.ActionLink("Meals", "Index", "Drinks")</li>
                             <li><a href="./pricing.html">Dessert</a></li>
-                            <li><a href="./portfolio.html">Soup</a></li>
+                            <li>@Html.ActionLink("Drinks","Index", "Drinks")</li>
                             <li><a href="./blog.html">About</a></li>
                             <li><a href="./contact.html">Contact</a></li>
                         </ul>
@@ -53,6 +52,7 @@
             @RenderBody()
         </div>
         <div class="main-right">
+            @*@Html.Action("NewRecipe")*@
             @Html.Action("PopularPost")
             @Html.Action("RecentPost")
         </div>

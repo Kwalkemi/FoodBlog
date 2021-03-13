@@ -34,12 +34,39 @@ namespace FoodBlogs.Business_Layer
         {
             List<string> lstPostTitle = new List<string>();
             FoodBlogEntities lFoodBlogEntities = new FoodBlogEntities();
-            foreach(string lFood_Blog in alstPostUniqueId)
+            foreach (string lFood_Blog in alstPostUniqueId)
             {
                 string lstrFoodTitle = lFoodBlogEntities.Food_Blog_Master.FirstOrDefault(x => x.Food_Blog_Post_Unique_Id == lFood_Blog).Food_Blog_Post_Title;
                 lstPostTitle.Add(lstrFoodTitle);
             }
             return lstPostTitle;
+        }
+
+        public List<string> GetFormattedList(List<string> astrList)
+        {
+            string lstrValue = string.Empty;
+            int index = 0;
+            List<string> lstDuplicatelist = new List<string>();
+            lstDuplicatelist.AddRange(astrList);
+            foreach (string str in lstDuplicatelist)
+            {
+                if (str.Contains("h5%"))
+                {
+                    lstrValue = str;
+                    index = astrList.IndexOf(str);
+                    if (index != -1)
+                    {
+                        astrList[index] = str.Replace("h5%", "<h5>");
+                        lstrValue = str.Replace("h5%", "<h5>");
+                    }
+                    if (lstrValue.Contains("%h5"))
+                    {
+                        if (index != -1)
+                            astrList[index] = lstrValue.Replace("%h5", "</h5>");
+                    }
+                }
+            }
+            return astrList;
         }
     }
 }

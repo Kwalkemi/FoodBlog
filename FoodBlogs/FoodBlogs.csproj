@@ -152,10 +152,20 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Business_Layer\Business_Logic.cs" />
+    <Compile Include="Business_Layer\ConsumingWebService.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\DrinksController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MealController.cs" />
+    <Compile Include="Controllers\UserPostController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="JsonClass\CocktailDetailJsonClass.cs" />
+    <Compile Include="JsonClass\CocktailHeaderJsonClass.cs" />
+    <Compile Include="JsonClass\MealCategoryJsonClass.cs" />
+    <Compile Include="JsonClass\MealDetailJsonClass.cs" />
+    <Compile Include="JsonClass\MealListJsonClass.cs" />
     <Compile Include="Models\FoodBlogEntity.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -177,6 +187,10 @@
     <Compile Include="Models\Food_Comments.cs">
       <DependentUpon>FoodBlogEntity.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\MyModel\Cocktail.cs" />
+    <Compile Include="Models\MyModel\CocktailDetail.cs" />
+    <Compile Include="Models\MyModel\MealCategory.cs" />
+    <Compile Include="Models\MyModel\MealList.cs" />
     <Compile Include="Models\MyModel\Post.cs" />
     <Compile Include="Models\Post_Visit_Count.cs">
       <DependentUpon>FoodBlogEntity.tt</DependentUpon>
@@ -185,6 +199,8 @@
       <DependentUpon>FoodBlogEntity.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Web_Service\CocktailWebService.cs" />
+    <Compile Include="Web_Service\MealWebService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-grid.css" />
@@ -352,11 +368,18 @@
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Post.cshtml" />
-    <Content Include="Views\Home\PopularPost.cshtml" />
-    <Content Include="Views\Home\_RecentPost.cshtml" />
+    <Content Include="Views\Home\NewRecipe.cshtml" />
+    <Content Include="Views\UserPost\Index.cshtml" />
+    <Content Include="Views\Drinks\Index.cshtml" />
+    <Content Include="Views\Shared\_RecentPost.cshtml" />
+    <Content Include="Views\Shared\PopularPost.cshtml" />
+    <Content Include="Views\Drinks\Detail.cshtml" />
+    <Content Include="Views\Meal\Index.cshtml" />
+    <Content Include="Views\Meal\MealList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

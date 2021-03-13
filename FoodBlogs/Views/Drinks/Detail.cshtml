@@ -1,0 +1,28 @@
+﻿@model FoodBlogs.Models.MyModel.CocktailDetail
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="Detail">
+    <h2>@Model.istrDrinkName</h2>
+    @if (Model.istrDrinkThumb != null && Model.istrDrinkThumb != "")
+    {
+        <img src=@Url.Content(Model.istrDrinkThumb) align="top" HSPACE="20" VSPACE="20" />
+    }
+    else
+    {
+        <img sr="" />
+    }
+
+    <h4>Ingredients</h4>
+    <ul>
+        @foreach (string strIngrdnt in Model.ilstIngredients)
+        {
+            <li>@strIngrdnt</li>
+        }
+    </ul>
+    <h4>Instruction</h4>
+    <p>@Model.istrInstructions</p>
+</div>
+

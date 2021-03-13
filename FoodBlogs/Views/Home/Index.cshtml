@@ -8,44 +8,67 @@
 
     @foreach (var lvar in Model)
     {
-    <div class="home-post">
-        <div class="home-post-new">
-            <div class="home-post-heading">
-                <h3>@lvar.istrPostHeading</h3>
-            </div>
-            @if (lvar.istrImage != null && lvar.istrImage != "")
-            {
-                <img src=@Url.Content(lvar.istrImage) align="top" HSPACE="20" VSPACE="20" />
-            }
-            else
-            {
-                <img sr="" />
-            }
-            @if (lvar.istrFrontContent != null && lvar.istrFrontContent != "")
-            {
-                <article>@Html.Raw(lvar.istrFrontContent)</article>
-            }
-            else
-            {
-                <article></article>
-            }
-
-            <strong>Ingredients</strong>
-            <ul>
-                @for (int i = 0; i < lvar.ilstIngredient.Count; i++)
+        <div class="home-post">
+            <div class="home-post-new">
+                <div class="home-post-heading">
+                    <h3>@lvar.istrPostHeading</h3>
+                </div>
+                @if (lvar.istrImage != null && lvar.istrImage != "")
                 {
-                    <li>@lvar.ilstIngredient[i]</li>
+                    <img src=@Url.Content(lvar.istrImage) align="top" HSPACE="20" VSPACE="20" />
                 }
-            </ul>
+                else
+                {
+                    <img sr="" />
+                }
+                @if (lvar.istrFrontContent != null && lvar.istrFrontContent != "")
+                {
+                    <article>@Html.Raw(lvar.istrFrontContent)</article>
+                }
+                else
+                {
+                    <article></article>
+                }
 
-            <article>
-                <strong>Preparation</strong>
-                @Html.Raw(lvar.istrBackContent)
-            </article>
+                <strong>Ingredients</strong>
+                <ul>
+                    @for (int i = 0; i < lvar.ilstIngredient.Count; i++)
+                    {
+                        if (lvar.ilstIngredient[i].Contains("<h5>"))
+                        {
+                            <br />
+                            @Html.Raw(lvar.ilstIngredient[i])
+
+                        }
+                        else
+                        {
+                            <li>@lvar.ilstIngredient[i]</li>
+                        }
+                    }
+                </ul>
+
+                <article>
+                    <strong>Preparation</strong>
+                    <ul>
+                        @for (int i = 0; i < lvar.ilstBackContent.Count; i++)
+                        {
+                            if (lvar.ilstBackContent[i].Contains("<h5>"))
+                            {
+                                <br />
+                                @Html.Raw(lvar.ilstBackContent[i])
+
+                            }
+                            else
+                            {
+                                <li>@lvar.ilstBackContent[i]</li>
+                            }
+                        }
+                    </ul>
+                </article>
+            </div>
+            <div class="readmore">
+                @Html.ActionLink("Read More", "Post", new { astrPostname = lvar.istrUniqueId })
+            </div>
         </div>
-        <div class="readmore">
-            @Html.ActionLink("Read More", "Post", new { astrPostname = lvar.istrUniqueId })
-        </div>
-    </div>
     }
 </div>

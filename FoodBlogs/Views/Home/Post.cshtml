@@ -26,16 +26,40 @@
     }
 
     <strong>Ingredients</strong>
+
     <ul>
         @for (int i = 0; i < Model.ilstIngredient.Count; i++)
         {
-            <li>@Model.ilstIngredient[i]</li>
+            if (Model.ilstIngredient[i].Contains("<h5>"))
+            {
+                <br />
+                @Html.Raw(Model.ilstIngredient[i])
+
+            }
+            else
+            {
+                <li>@Model.ilstIngredient[i]</li>
+            }
         }
     </ul>
 
     <article>
         <strong>Preparation</strong>
-        @Html.Raw(Model.istrBackContent)
+        <ul>
+            @for (int i = 0; i < Model.ilstBackContent.Count; i++)
+            {
+                if (Model.ilstBackContent[i].Contains("<h5>"))
+                {
+                    <br />
+                    @Html.Raw(Model.ilstBackContent[i])
+
+                }
+                else
+                {
+                    <li>@Model.ilstBackContent[i]</li>
+                }
+            }
+        </ul>
     </article>
 </div>
 
@@ -80,7 +104,7 @@
                 </div><!-- /panel panel-default -->
             </div><!-- /col-sm-5 -->
         </div><!-- /row -->
-        <br/>
+        <br />
     }
 </div>
 
