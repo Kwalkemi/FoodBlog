@@ -5,7 +5,7 @@ using System.Web;
 
 namespace FoodBlogs.Models.MyModel
 {
-    public class Post
+    public class Post : BaseModel
     {
         public string istrUniqueId { get; set; }
         public string istrPostHeading { get; set; }
@@ -14,7 +14,5 @@ namespace FoodBlogs.Models.MyModel
         public List<string> ilstIngredient { get; set; }
         public List<string> ilstBackContent { get; set; }
         public DateTime idtCreatedPost { get; set; }
-        public Food_Comments iComment { get; set; }
-        public List<Food_Comments> ilstComment { get; set; }
     }
 }

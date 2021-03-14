@@ -1,0 +1,48 @@
+﻿@model FoodBlogs.Models.MyModel.Comments
+
+<div id="CommentSection" class="container comment">
+    <div class="row">
+        <header class="col-sm-12">
+            <h3>Feedback</h3>
+        </header><!-- /col-sm-12 -->
+    </div><!-- /row -->
+    <div class="row">
+        @using (Html.BeginForm("Comment", "Home", FormMethod.Post))
+        {
+            @Html.HiddenFor(m => m.istrUniqueId)
+            @Html.TextBoxFor(m => m.iFoodComments.Food_Comment_User_Name, new { placeholder = "Name" })
+            @Html.TextBoxFor(m => m.iFoodComments.Food_Comment_Email_id, "", new { placeholder = "Email" })
+
+            @Html.TextAreaFor(m => m.iFoodComments.Food_Comment_Description, new { placeholder = "Type your comment here.", cols = "60", rows = "5" })
+            <br />
+            @*<input type="submit" value="Submit" />*@
+            <button id="btnComment">Submit</button>
+        }
+    </div>
+    @if (Model.ilstcommentLists != null)
+    {
+        foreach (var lvar in Model.ilstcommentLists)
+        {
+            <div class="row">
+                <div class="col-sm-6">
+                    <div>
+                        <img src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png">
+                    </div>
+                </div>
+                <div class="col-sm-11">
+                    <div class="card">
+                        <div class="card-header">
+                            <strong>@lvar.username</strong> <span class="text-muted">commented 5 days ago</span>
+                        </div>
+                        <div class="card-body">
+                            @lvar.commentbody
+                        </div>
+                    </div><!-- /panel panel-default -->
+                </div><!-- /col-sm-5 -->
+            </div>
+            <br />
+        }
+    }
+</div>
+<br />
+<br />

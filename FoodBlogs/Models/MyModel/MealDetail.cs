@@ -5,29 +5,27 @@ using System.Web;
 
 namespace FoodBlogs.Models.MyModel
 {
-    public class CocktailDetail: BaseModel
+    public class MealDetail :BaseModel
     {
-        public string istrDrinkId { get; set; }
+        public int iintMealId { get; set; }
 
-        public string istrDrinkName { get; set; }
+        public string istrMealName { get; set; }
 
         public string istrDrinkAlternateName { get; set; }
 
         public string istrTags { get; set; }
 
-        public string istrVideo { get; set; }
+        public string istrYouVideo { get; set; }
 
         public string istrCategory { get; set; }
 
-        public string istrIBA { get; set; }
+        public string istrArea { get; set; }
 
         public string istrAlcoholic { get; set; }
 
-        public string istrGlass { get; set; }
-
         public string istrInstructions { get; set; }
 
-        public string istrDrinkThumb { get; set; }
+        public string istrMealThumb { get; set; }
 
         public List<string> ilstIngredients { get; set; }
 

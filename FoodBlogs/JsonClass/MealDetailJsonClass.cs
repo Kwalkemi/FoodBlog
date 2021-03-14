@@ -9,7 +9,7 @@ namespace FoodBlogs.JsonClass
     public class MealDetailJsonClass
     {
         [JsonProperty("meals")]
-        public List<MealDetailJsonClass> ilstMealDetail { get; set; }
+        public List<MealDetailJson> ilstMealDetail { get; set; }
     }
 
     public class MealDetailJson

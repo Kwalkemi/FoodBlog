@@ -1,0 +1,39 @@
+﻿@model FoodBlogs.Models.MyModel.MealDetail
+@{
+    ViewBag.Title = "MealDetail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="Detail">
+    <h2>@Model.istrMealName</h2>
+    @if (Model.istrMealThumb != null && Model.istrMealThumb != "")
+    {
+        <img src=@Url.Content(Model.istrMealThumb) align="top" HSPACE="20" VSPACE="20" />
+    }
+    else
+    {
+        <img sr="" />
+    }
+
+    <h4>Ingredients</h4>
+    <ul>
+        @foreach (string strIngrdnt in Model.ilstIngredients)
+        {
+            <li>@strIngrdnt</li>
+        }
+    </ul>
+    <h4>Instruction</h4>
+    <p>@Html.Raw(Model.istrInstructions)</p>
+
+    @*@Microsoft.Web.Helpers.Video.Flash("http://www.youtube.com/v/xxxxxx")*@
+
+    <video>
+        <source @Url.Content(Model.istrYouVideo) type="video/webm" />
+    </video>
+
+
+</div>
+<br />
+<br />
+@Html.Partial("_Comments", Model.icomments)
+

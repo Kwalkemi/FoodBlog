@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using UserLibrary;
 using FoodBlogs.Models;
+using FoodBlogs.Models.MyModel;
 
 namespace FoodBlogs.Business_Layer
 {
@@ -67,6 +68,29 @@ namespace FoodBlogs.Business_Layer
                 }
             }
             return astrList;
+        }
+
+        public Comments GetCommentlistByPostName(string astrPostname = "")
+        {
+            Comments comments = new Comments();
+            comments.ilstcommentLists = new List<CommentList>();
+            FoodBlogEntities lFoodBlogEntities = new FoodBlogEntities();
+            CommentList commentList = null;
+            if (astrPostname != string.Empty)
+            {
+                List<Food_Comments> food_Comments = lFoodBlogEntities.Food_Comments.Where(x => x.Food_Comment_Page == astrPostname).ToList();
+                if (food_Comments != null && food_Comments.Count > 0)
+                {
+                    foreach (Food_Comments _Comments in food_Comments)
+                    {
+                        commentList = new CommentList();
+                        commentList.username = _Comments.Food_Comment_Email_id;
+                        commentList.commentbody = _Comments.Food_Comment_Description;
+                        comments.ilstcommentLists.Add(commentList);
+                    }
+                }
+            }
+            return comments;
         }
     }
 }

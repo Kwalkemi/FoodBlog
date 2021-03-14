@@ -4,5 +4,28 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
+<div id="category">
+    @foreach (FoodBlogs.Models.MyModel.MealCategory mealCategory in Model)
+    {
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header font-weight-bold text-aligned-center">@mealCategory.istrCategoryName</div>
+                        <div class="card-body">
+                            <div class="Centered"><img src=@Url.Content(mealCategory.istrCategoryThumb) class="card-img" /></div>
+                            <div class="">@Html.Raw(mealCategory.istrCategoryDescription)</div>
+                        </div>
+                        <div class="card-footer">
+                            @Html.ActionLink("Check out list", "MealList", "Meal", new { astrCategoryName = mealCategory.istrCategoryName }, new { @class = "btn-outline-danger" })
+                            @*<button class="btn-outline-danger">Check out list</button>*@
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br />
+        <br />
+    }
+</div>
 

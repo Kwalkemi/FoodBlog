@@ -7,6 +7,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using UserLibrary;
+using FoodBlogs.Models.MyModel;
 
 namespace FoodBlogs.Controllers
 {
@@ -43,6 +44,21 @@ namespace FoodBlogs.Controllers
             }
             ViewBag.listRecentPost = lstPostUniqueId;
             return PartialView("_RecentPost");
+        }
+
+        [HttpPost]
+        public ActionResult Comment(string comment)
+        {
+            Comments aPost = new Comments();
+            aPost.iFoodComments = new Food_Comments();
+            DBFunction lDBFunction = new DBFunction();
+            Dictionary<string, string> ldict = new Dictionary<string, string>();
+            ldict.Add("Food_Comment_Description", aPost.iFoodComments.Food_Comment_Description);
+            ldict.Add("Food_Comment_User_Name", aPost.iFoodComments.Food_Comment_User_Name);
+            ldict.Add("Food_Comment_Email_id", aPost.iFoodComments.Food_Comment_Email_id);
+            ldict.Add("Food_Comment_Page", aPost.istrUniqueId);
+            //lDBFunction.InsertIntoTable("FoodBlog", "Food_Comments", ldict);
+            return PartialView("_Comments", aPost );
         }
     }
 }

@@ -20,6 +20,21 @@ $(document).ready(function () {
             height: '50px'
         }, "slow")
     });
+    $("#btnComment").click(function () {
+        var id = "ABC";
+        var booksDiv = $("#bodySection");
+        $.ajax({
+            cache: false,
+            type: "POST",
+            url: "Base/Comment",
+            data: { "comment": id },
+            success: function (data) {
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                alert('Failed to retrieve books.');
+            }
+        });
+    });
 });
 
 $('#search').keypress(function (e) {

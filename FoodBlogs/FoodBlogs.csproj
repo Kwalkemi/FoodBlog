@@ -187,9 +187,12 @@
     <Compile Include="Models\Food_Comments.cs">
       <DependentUpon>FoodBlogEntity.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\MyModel\BaseModel.cs" />
     <Compile Include="Models\MyModel\Cocktail.cs" />
     <Compile Include="Models\MyModel\CocktailDetail.cs" />
+    <Compile Include="Models\MyModel\Comments.cs" />
     <Compile Include="Models\MyModel\MealCategory.cs" />
+    <Compile Include="Models\MyModel\MealDetail.cs" />
     <Compile Include="Models\MyModel\MealList.cs" />
     <Compile Include="Models\MyModel\Post.cs" />
     <Compile Include="Models\Post_Visit_Count.cs">
@@ -376,6 +379,8 @@
     <Content Include="Views\Drinks\Detail.cshtml" />
     <Content Include="Views\Meal\Index.cshtml" />
     <Content Include="Views\Meal\MealList.cshtml" />
+    <Content Include="Views\Meal\MealDetail.cshtml" />
+    <Content Include="Views\Shared\_Comments.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

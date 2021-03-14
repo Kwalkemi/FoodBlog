@@ -49,6 +49,7 @@ namespace FoodBlogs.Controllers
         public ActionResult Detail(int aintId)
         {
             CocktailWebService webService = new CocktailWebService();
+            Business_Logic lBusiness_Logic = new Business_Logic();
             CocktailDetailJsonClass cocktailDetailJson = new CocktailDetailJsonClass();
             cocktailDetailJson = webService.CocktailDetailWebService(aintId);
             string lstrIngredient = string.Empty;
@@ -57,7 +58,8 @@ namespace FoodBlogs.Controllers
             cocktailDetail.istrDrinkName = cocktailDetailJson.ilstCocktailDetail[0].strDrink;
             cocktailDetail.istrDrinkThumb = cocktailDetailJson.ilstCocktailDetail[0].strDrinkThumb;
             cocktailDetail.ilstIngredients = new List<string>();
-            if(!string.IsNullOrEmpty(cocktailDetailJson.ilstCocktailDetail[0].strIngredient1))
+            cocktailDetail.icomments = lBusiness_Logic.GetCommentlistByPostName();
+            if (!string.IsNullOrEmpty(cocktailDetailJson.ilstCocktailDetail[0].strIngredient1))
             {
                 lstrIngredient = cocktailDetailJson.ilstCocktailDetail[0].strIngredient1;
                 if (!string.IsNullOrEmpty(cocktailDetailJson.ilstCocktailDetail[0].strMeasure1))

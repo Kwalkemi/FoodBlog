@@ -318,6 +318,7 @@
         border-bottom-style: solid;
         padding-bottom: 20px;
         border-width: 5px;
+        width:100%;
     }
 
         .comment form input[type=text] {
@@ -331,7 +332,7 @@
         }
 
         .comment form textarea {
-            width: 100%;
+            width: 80%;
             padding: 12px 20px;
             margin: 8px 60px 0px 60px;
             display: block;
@@ -353,7 +354,7 @@
 #Detail {
     background-color: antiquewhite;
     padding-bottom: 10px;
-    position:relative;
+    position: relative;
 }
 
     #Detail h2 {
@@ -380,6 +381,14 @@
     #Detail p {
         margin-left: 30px;
     }
+
+
+.Centered {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width:50%;
+}
 
 .site-footer {
     background-color: #26272b;

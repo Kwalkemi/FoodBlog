@@ -14,7 +14,7 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
-<body>
+<body id="bodySection">
     <div id="preloder">
         <div class="loader"></div>
     </div>
@@ -31,7 +31,7 @@
                     <nav class="nav-menu mobile-menu">
                         <ul>
                             <li class="active">@Html.ActionLink("Home", "Index")</li>
-                            <li>@Html.ActionLink("Meals", "Index", "Drinks")</li>
+                            <li>@Html.ActionLink("Meals", "Index", "Meal")</li>
                             <li><a href="./pricing.html">Dessert</a></li>
                             <li>@Html.ActionLink("Drinks","Index", "Drinks")</li>
                             <li><a href="./blog.html">About</a></li>
@@ -70,12 +70,11 @@
                 <div class="col-xs-6 col-md-3">
                     <h6>Categories</h6>
                     <ul class="footer-links">
-                        <li><a href="http://scanfcode.com/category/c-language/">C</a></li>
-                        <li><a href="http://scanfcode.com/category/front-end-development/">UI Design</a></li>
-                        <li><a href="http://scanfcode.com/category/back-end-development/">PHP</a></li>
-                        <li><a href="http://scanfcode.com/category/java-programming-language/">Java</a></li>
-                        <li><a href="http://scanfcode.com/category/android/">Android</a></li>
-                        <li><a href="http://scanfcode.com/category/templates/">Templates</a></li>
+                        <li>@Html.ActionLink("Vegetarian", "MealList", "Meal", new { astrCategoryName = "Vegetarian" }, null)</li>
+                        <li>@Html.ActionLink("Dessert", "MealList", "Meal", new { astrCategoryName = "Dessert" }, null)</li>
+                        <li>@Html.ActionLink("Chicken", "MealList", "Meal", new { astrCategoryName = "Chicken" }, null)</li>
+                        <li>@Html.ActionLink("Pork", "MealList", "Meal", new { astrCategoryName = "Pork" }, null)</li>
+                        <li>@Html.ActionLink("Starter", "MealList", "Meal", new { astrCategoryName = "Starter" }, null)</li>
                     </ul>
                 </div>
 

@@ -5,7 +5,7 @@ using System.Web;
 
 namespace FoodBlogs.Models.MyModel
 {
-    public class Cocktail
+    public class Cocktail :BaseModel
     {
         public int CocktailId { get; set; }
 

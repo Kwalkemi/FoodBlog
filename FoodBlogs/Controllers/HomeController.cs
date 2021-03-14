@@ -33,7 +33,7 @@ namespace FoodBlogs.Controllers
                 lPost = new Post();
                 FileInfo fileInfo = new FileInfo(lstrFile);
                 lPost.idtCreatedPost = fileInfo.LastWriteTime;
-                
+
                 string filename = lstrFile.Substring(lstrFile.LastIndexOf('\\') + 1);
                 lPost.istrUniqueId = lXmlFunction.GetElementsAtNode(lstrPath, filename, "UniqueId").FirstOrDefault();
                 lPost.istrPostHeading = lXmlFunction.GetElementsAtNode(lstrPath, filename, "Heading").FirstOrDefault();
@@ -45,7 +45,7 @@ namespace FoodBlogs.Controllers
                 lBusiness_Logic.GetFormattedList(lPost.ilstIngredient);
                 string[] lstrBackContent = lXmlFunction.GetElementsAtNode(lstrPath, filename, "BackContent").FirstOrDefault().Split('*');
                 lPost.ilstBackContent = lBusiness_Logic.GetFormattedList(lstrBackContent.ToList());
-                
+
                 lstPost.Add(lPost);
             }
             lstPost = lstPost.OrderByDescending(x => x.idtCreatedPost).ToList();
@@ -56,7 +56,6 @@ namespace FoodBlogs.Controllers
         public ActionResult Post(string astrPostname)
         {
             Post lPost = new Post();
-            lPost.iComment = new Food_Comments();
             Business_Logic lBusiness_Logic = new Business_Logic();
             FoodBlogEntities lFoodBlogEntities = new FoodBlogEntities();
             string filename = astrPostname + ".xml";
@@ -71,12 +70,12 @@ namespace FoodBlogs.Controllers
             lPost.ilstIngredient = lXmlFunction.GetElementsAtNode(lstrPath, filename, "Ingredient").FirstOrDefault().ToString().Split(',').ToList();
             ///lPost.ilstIngredient.ForEach(x => { if(x.Contains("h3%") || x.Contains("%h3")){ x = x.Replace("h3%", "<h3>"); x = x.Replace("%h3","</h3>"); } });
             lBusiness_Logic.GetFormattedList(lPost.ilstIngredient);
-            
+
             string[] lstrBackContent = lXmlFunction.GetElementsAtNode(lstrPath, filename, "BackContent").FirstOrDefault().Split('*');
             lPost.ilstBackContent = lBusiness_Logic.GetFormattedList(lstrBackContent.ToList());
 
-            lPost.ilstComment = lFoodBlogEntities.Food_Comments.Where(x => x.Food_Comment_Page == astrPostname).ToList();
-
+            lPost.icomments = lBusiness_Logic.GetCommentlistByPostName(astrPostname);
+            
             lBusiness_Logic.InsertOrUpdateVisitCount(astrPostname);
 
             return View(lPost);
@@ -88,19 +87,9 @@ namespace FoodBlogs.Controllers
             return PartialView();
         }
 
-        public ActionResult Comment(Post aPost)
-        {
-            DBFunction lDBFunction = new DBFunction();
-            Dictionary<string, string> ldict = new Dictionary<string, string>();
-            ldict.Add("Food_Comment_Description", aPost.iComment.Food_Comment_Description);
-            ldict.Add("Food_Comment_User_Name", aPost.iComment.Food_Comment_User_Name);
-            ldict.Add("Food_Comment_Email_id", aPost.iComment.Food_Comment_Email_id);
-            ldict.Add("Food_Comment_Page", aPost.istrUniqueId);
-            lDBFunction.InsertIntoTable("FoodBlog", "Food_Comments", ldict);
-            return RedirectToAction("Post", new { astrPostname = aPost.istrUniqueId });
-        }
-
         
+
+
 
 
 
